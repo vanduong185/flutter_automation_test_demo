@@ -26,10 +26,25 @@ void main() {
     await tester.pumpWidget(MyHomePageWrapper());
 
     // scroll to bottom
-    // await tester.drag(find.byType(ListView), const Offset(0.0, -50));
+    await tester.drag(find.byType(ListView), const Offset(0.0, -300));
     await tester.pump();
 
     expect(find.text("green"), findsOneWidget);
+  });
+
+  testWidgets("tap color", (WidgetTester tester) async {
+    await tester.pumpWidget(MyHomePageWrapper());
+
+    await tester.tap(find.byKey(Key("ges_red")));
+    await tester.pump();
+
+    WidgetPredicate widgetSelectedPredicate = (Widget widget) {
+      return (widget is Card &&
+          widget.key == Key("card_red") &&
+          widget.color == Colors.blue.shade100);
+    };
+
+    expect(find.byWidgetPredicate(widgetSelectedPredicate), findsOneWidget);
   });
 }
 

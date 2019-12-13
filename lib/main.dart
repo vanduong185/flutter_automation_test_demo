@@ -54,12 +54,12 @@ class _MyHomePageState extends State<MyHomePage> {
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
               child: GestureDetector(
-                // key: Key(myColor.name),
+                key: Key('ges_${myColor.name}'),
                 onTap: () {
                   onTapped(index);
                 },
                 child: Card(
-                  key: Key(myColor.name),
+                  key: Key('card_${myColor.name}'),
                   color: selected == index ? Colors.blue.shade100 : null,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
