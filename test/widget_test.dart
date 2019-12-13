@@ -1,30 +1,49 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility that Flutter provides. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:automation_test_demo/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp());
+  // final TestWidgetsFlutterBinding binding = TestWidgetsFlutterBinding.ensureInitialized();
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  testWidgets('Red item is displayed', (WidgetTester tester) async {
+    await tester.pumpWidget(MyHomePageWrapper());
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+    expect(find.text("red"), findsOneWidget);
+  });
+
+  testWidgets('Pink item is displayed', (WidgetTester tester) async {
+    await tester.pumpWidget(MyHomePageWrapper());
+
+    expect(find.text("pink"), findsOneWidget);
+  });
+
+  testWidgets('Green item is displayed in the bottom of listview',
+      (WidgetTester tester) async {
+    // binding.window.physicalSizeTestValue = Size(800, 700);
+    // binding.window.devicePixelRatioTestValue = 1.0;
+
+    await tester.pumpWidget(MyHomePageWrapper());
+
+    // scroll to bottom
+    // await tester.drag(find.byType(ListView), const Offset(0.0, -50));
     await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.text("green"), findsOneWidget);
   });
+}
+
+class MyHomePageWrapper extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MediaQuery(
+      data: MediaQueryData(
+        size: Size(400, 900),
+      ),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        home: MyHomePage(),
+      ),
+    );
+  }
 }
