@@ -66,6 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Center(
                       child: Text(
                         myColor.name,
+                        key: ValueKey('text_${myColor.name}'),
                         style: TextStyle(
                           color: myColor.color,
                           fontSize: 40,
